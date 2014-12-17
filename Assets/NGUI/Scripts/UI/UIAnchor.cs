@@ -111,7 +111,7 @@ public class UIAnchor : MonoBehaviour
 	/// Anchor the object to the appropriate point.
 	/// </summary>
 
-	void Update ()
+	public void Update ()
 	{
 		if (mAnim != null && mAnim.enabled && mAnim.isPlaying) return;
 

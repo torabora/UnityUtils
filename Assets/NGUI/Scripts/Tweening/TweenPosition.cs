@@ -48,6 +48,8 @@ public class TweenPosition : UITweener
 				value -= cachedTransform.localPosition;
 				NGUIMath.MoveRect(mRect, value.x, value.y);
 			}
+
+            if (OnUpdateEV != null) OnUpdateEV(); 
 		}
 	}
 
@@ -58,6 +60,13 @@ public class TweenPosition : UITweener
 	/// </summary>
 
 	protected override void OnUpdate (float factor, bool isFinished) { value = from * (1f - factor) + to * factor; }
+
+    public System.Action OnUpdateEV;
+    static public TweenPosition Begin(GameObject go, float duration, Vector3 pos, System.Action onUpdateEV) {
+        TweenPosition rez = Begin(go, duration, pos);
+        rez.OnUpdateEV = onUpdateEV;
+        return rez;
+    }
 
 	/// <summary>
 	/// Start the tweening operation.

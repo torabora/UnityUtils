@@ -97,6 +97,6 @@ public class UILocalize : MonoBehaviour
 		}
 
 		// If we still don't have a key, leave the value as blank
-       // if (!string.IsNullOrEmpty(key)) value = LocalizationController.instance.Get(key);
+        //if (!string.IsNullOrEmpty(key)) value = LocalizationController.instance.Get(key);
 	}
 }

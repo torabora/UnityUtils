@@ -263,7 +263,7 @@ public class UIGrid : UIWidgetContainer
 	/// Reset the position if necessary, then disable the component.
 	/// </summary>
 
-	protected virtual void Update ()
+	public virtual void Update ()
 	{
 		if (mReposition) Reposition();
 		enabled = false;

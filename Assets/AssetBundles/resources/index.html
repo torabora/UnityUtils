@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<script type='text/javascript' src='jquery.min.js'></script>
+	
+		<script type="text/javascript">
+		</script>
+		
+		<script type="text/javascript">
+				var $version = 1412101732;
+		</script>
+		
+		<script type="text/javascript">	
+			function doLogin() {
+			  VK.Auth.login(
+				null,
+				66562
+				//VK.access.FRIENDS | VK.access.WIKI
+			  );
+			}
+			
+			function getCookie(name) {
+				var matches = document.cookie.match(new RegExp(
+				  "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+				))
+				return matches ? decodeURIComponent(matches[1]) : undefined 
+			}
+			
+			function setCookie (name, value) {
+				var str = name + "=" + escape (value)
+				for(var i=2; i<arguments.length; i++){
+					var arg = arguments[i]
+					switch (i){
+						case 2:
+							if (typeof(arg) != 'undefined') {
+								if (typeof(arg) != 'object') {
+									var s=1000, m=60*s, h=60*m, d=24*h, mon=30*d, y=12*mon
+									arg = new Date(new Date().getTime() + eval('0' + arg.toString().toLowerCase().replace(/([0-9]+)([a-z]+)/g,'$1*$2')))
+								}
+								else if(arg.days!=undefined) {arg=new Date(new Date().getTime() + arg.days*86400*1000)};
+								str += "; expires=" + arg.toGMTString()
+								
+							}
+							break
+						case 3:
+							str += "; path=" + arg
+							break
+						case 4:
+							str += "; domain=" + arg
+							break
+						case 5:
+							str += "; secure"
+							break
+					}
+				}
+				document.cookie = str
+			}
+			
+			function deleteCookie(name) {  
+				setCookie(name, getCookie (name), -1)
+			}
+		</script>
+		
+		<div id="vk_api_transport"></div>
+		<script type="text/javascript">
+		
+				setCookie("api_id", 4544788);	
+				
+				  window.vkAsyncInit = function() {
+					VK.Auth.getLoginStatus(function(response) {
+					  if (response.session) {
+						window.location = 'http://onraid.com/df.html';
+					  } else {
+						VK.UI.button('vk_login');
+					  }
+					});
+					VK.Observer.subscribe('auth.login', function(response) {					
+						window.location = 'http://onraid.com/df.html';
+					});
+					VK.Observer.subscribe('auth.logout', function() {
+					  //console.log('logout');
+					});
+					VK.Observer.subscribe('auth.statusChange', function(response) {
+					  //console.log('statusChange');
+					});
+					VK.Observer.subscribe('auth.sessionChange', function(r) {
+					  //console.log('sessionChange');
+					});
+
+					VK.init({
+					  //apiId: 4544788,
+					  apiId: getCookie("api_id"),
+					  nameTransportPath: '/xd_receiver.html'
+					});
+					VK.UI.button('vk_login');
+				  };
+				  setTimeout(function() {
+					var el = document.createElement('script');
+					el.type = 'text/javascript';
+					el.src = '//vk.com/js/api/openapi.js?3';
+					el.async = true;
+					document.getElementById('vk_api_transport').appendChild(el);
+				  }, 0);
+
+		</script>
+	
+
+		<div style="position: relative; width: 149px; left: 50%; margin-left: -90px; height: 43px; top: 50%; margin-top: 400px;"> 
+		<div id="vk_login" onclick="doLogin();"></div>
+		
+		</div>
+
+		<style type="text/css">
+		
+		</style>
+		
+	</head>
+	<body>
+	<style>body {background:#0e0e0e} </style>
+	
+		<div class="content">
+			<div id="unityPlayer">
+				<div class="missing">
+					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+						<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="0" />
+					</a>
+				</div>
+				<div class="broken">
+					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install.">
+						<img alt="Unity Web Player. Install now! Restart your browser after install." src="http://webplayer.unity3d.com/installation/getunityrestart.png" width="193" height="0" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

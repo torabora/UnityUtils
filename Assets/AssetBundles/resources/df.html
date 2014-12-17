@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Raid</title>
+		<script type='text/javascript' src='jquery.min.js'></script>
+
+		<!-- эта строка сгенерирована, метка: VK_API_LIB -->
+		<script src='//vk.com/js/api/openapi.js' type='text/javascript'> </script>
+		
+		<script type="text/javascript">
+		<!--
+		var unityObjectUrl = "UnityObject2.js";
+		if (document.location.protocol == 'https:')
+			unityObjectUrl = unityObjectUrl.replace("http://", "https://ssl-");
+		document.write('<script type="text\/javascript" src="' + unityObjectUrl + '"><\/script>');
+		-->
+		</script>
+		<script type="text/javascript">
+			
+		<!--
+			var config = {
+				width: 1000, 
+				height: 750,
+				params: { 
+				enableDebugging:"1" , 
+				disableContextMenu:"true",
+				bordercolor:"0e0e0e",
+				backgroundcolor:"0e0e0e",
+				logoimage:"loading.png",
+				progressbarimage:"black_img.png",
+				progressframeimage:"black_img.png"
+				}
+			};
+			var u = new UnityObject2(config);
+
+			jQuery(function() {
+
+				var $missingScreen = jQuery("#unityPlayer").find(".missing");
+				var $brokenScreen = jQuery("#unityPlayer").find(".broken");
+				$missingScreen.hide();
+				$brokenScreen.hide();
+				
+				u.observeProgress(function (progress) {
+					switch(progress.pluginStatus) {
+						case "broken":
+							$brokenScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$brokenScreen.show();
+						break;
+						case "missing":
+							$missingScreen.find("a").click(function (e) {
+								e.stopPropagation();
+								e.preventDefault();
+								u.installPlugin();
+								return false;
+							});
+							$missingScreen.show();
+						break;
+						case "installed":
+							$missingScreen.remove();
+						break;
+						case "first":
+						break;
+					}
+				});
+				var $version = 1412101732;
+				u.initPlugin(jQuery("#unityPlayer")[0], "Application_" + $version + "/preloader.unity3d");
+				
+				//Хак для Google Chrome (при переходе в fullscreen webplayer не реагировал на мышь)
+				document.addEventListener("keyup", function(e) {
+                    if (e.keyCode == 122) {
+                        $('#unityPlayer').css({"margin-left": "1px"});
+                        setTimeout(function() {
+                            $('#unityPlayer').css({"margin-left": "0px"});
+                        }, 1);
+                    }
+                }, false);
+			});
+		-->
+		
+		</script>
+		
+		<script type="text/javascript">
+			function doLogout() {
+				VK.init({apiId: getCookie("api_id"), nameTransportPath: "xd_receiver.html"});
+				VK.Auth.getLoginStatus(function(response) {
+					if (response.session) { 
+						/* Пользователь успешно авторизован */ 
+						VK.Auth.logout();
+						window.location.replace('http://onraid.com/index.html');
+					}
+				});
+			}
+		
+			function getCookie(name) {
+				var matches = document.cookie.match(new RegExp(
+				  "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+				))
+				return matches ? decodeURIComponent(matches[1]) : undefined 
+			}
+		</script>
+					
+		<style type="text/css">
+		<!--
+		body {
+			font-family: Helvetica, Verdana, Arial, sans-serif;
+			background-color: #0e0e0e;
+			color: black;
+			text-align: center;
+			margin: 0px;
+            padding: 0px;
+		}
+		a:link, a:visited {
+			color: #000;
+		}
+		a:active, a:hover {
+			color: #666;
+		}
+		p.header {
+			font-size: small;
+		}
+		p.header span {
+			font-weight: bold;
+		}
+		p.footer {
+			font-size: x-small;
+		}
+		div.content {
+			margin: auto;
+			width: 1000px;
+		}
+		div.broken,
+		div.missing {
+			margin: auto;
+			position: relative;
+			top: 50%;
+			width: 193px;
+		}
+		div.broken a,
+		div.missing a {
+			height: 63px;
+			position: relative;
+			top: -31px;
+		}
+		div.broken img,
+		div.missing img {
+			border-width: 0px;
+		}
+		div.broken {
+			display: none;
+		}
+		div#unityPlayer {
+			cursor: default;
+			height: 750px;
+			width: 1000px;
+		}
+		-->
+		</style>
+	</head>
+	<body>
+		<div class="content">
+			<div id="unityPlayer">
+				<div class="missing">
+					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now!">
+						<img alt="Unity Web Player. Install now!" src="http://webplayer.unity3d.com/installation/getunity.png" width="193" height="63" />
+					</a>
+				</div>
+				<div class="broken">
+					<a href="http://unity3d.com/webplayer/" title="Unity Web Player. Install now! Restart your browser after install.">
+						<img alt="Unity Web Player. Install now! Restart your browser after install." src="http://webplayer.unity3d.com/installation/getunityrestart.png" width="193" height="63" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- эта строка сгенерирована, метка: VK_LOGOUT_BUTTON -->
+		<p><input type='button' onclick='doLogout();' value='Выйти из VK' style="float: center; margin-right: -900px;"></p> 
+		
+	</body>
+</html>

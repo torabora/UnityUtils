@@ -42,7 +42,7 @@ public class TweenLabel : UITweener {
     /// </summary>
     public static TweenPosition Begin(GameObject go, float duration, Vector3 pos) {
         TweenPosition comp = Begin<TweenPosition>(go, duration);
-        comp.from = comp.position;
+        comp.from = comp.value;
         comp.to = pos;
 
         if (duration <= 0f) {

@@ -23,6 +23,8 @@ public class SaveScreen1 : MonoBehaviour {
 	}
 	
 	IEnumerator SaveScreenshot(string name) {
+		//yield return new WaitForEndOfFrame();
+
 		int sw = 300;
 		int sh = 600;
 		
@@ -31,12 +33,11 @@ public class SaveScreen1 : MonoBehaviour {
 		Texture2D sc = new Texture2D(sw,sh,TextureFormat.RGB24, false);
 		mainCam.Render();
 		
-		yield return new WaitForSeconds(0.3f);
+		yield return new WaitForEndOfFrame();
 		showText = true;
-		
-		
+
 		RenderTexture.active = rt;
-		sc.ReadPixels(new Rect(0,0,sw,sh), 0,0);
+		sc.ReadPixels (new Rect(0,0,sw,sh), 0,0);
 		mainCam.targetTexture = null;
 		RenderTexture.active = null;
 		Destroy(rt);
@@ -44,7 +45,7 @@ public class SaveScreen1 : MonoBehaviour {
 		byte[] bytes = sc.EncodeToPNG();
 		string finalPath = mainPath + name + ".png";
 		File.WriteAllBytes(finalPath, bytes);
-		
+
 		if (bytes != null) {
 			WWWForm form = new WWWForm ();
 			form.AddBinaryData("file", bytes, "screenShot1.png", "images/"); 
@@ -65,9 +66,7 @@ public class SaveScreen1 : MonoBehaviour {
 			GUI.Label(new Rect(100,200,200,50), "Сохранение снимка");
 		}
 	}
-	
-	
-	
+
 	IEnumerator WaitForRequest(WWW web) {
 		yield return web;
 		if (web.error != null) {
@@ -78,16 +77,11 @@ public class SaveScreen1 : MonoBehaviour {
 	}
 	
 	void Update() {
-		
-		
 		if(Input.GetKeyDown(KeyCode.Space)) {
 			i++;
 			cName = "Screen_"+i;
 			StartCoroutine(SaveScreenshot(cName));
 			showText = true;
 		}
-		
 	}
-	
-	
 }

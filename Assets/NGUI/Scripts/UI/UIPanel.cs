@@ -1132,7 +1132,7 @@ public class UIPanel : UIRect
 	/// Update all panels and draw calls.
 	/// </summary>
 
-	void LateUpdate ()
+	public void LateUpdate ()
 	{
 #if UNITY_EDITOR
 		if (mUpdateFrame != Time.frameCount || !Application.isPlaying)
@@ -1179,7 +1179,7 @@ public class UIPanel : UIRect
 	/// Update the panel, all of its widgets and draw calls.
 	/// </summary>
 
-	void UpdateSelf ()
+	public void UpdateSelf ()
 	{
 		mUpdateTime = RealTime.time;
 
@@ -1230,7 +1230,7 @@ public class UIPanel : UIRect
 	/// Fill the geometry fully, processing all widgets and re-creating all draw calls.
 	/// </summary>
 
-	void FillAllDrawCalls ()
+	public void FillAllDrawCalls ()
 	{
 		for (int i = 0; i < drawCalls.size; ++i)
 			UIDrawCall.Destroy(drawCalls.buffer[i]);
@@ -1347,7 +1347,7 @@ public class UIPanel : UIRect
 	/// Update all draw calls associated with the panel.
 	/// </summary>
 
-	void UpdateDrawCalls ()
+	public void UpdateDrawCalls ()
 	{
 		Transform trans = cachedTransform;
 		bool isUI = usedForUI;
@@ -1419,7 +1419,7 @@ public class UIPanel : UIRect
 	/// Update the widget layers if the panel's layer has changed.
 	/// </summary>
 
-	void UpdateLayers ()
+	public void UpdateLayers ()
 	{
 		// Always move widgets to the panel's layer
 		if (mLayer != cachedGameObject.layer)
@@ -1440,7 +1440,7 @@ public class UIPanel : UIRect
 	/// Update all of the widgets belonging to this panel.
 	/// </summary>
 
-	void UpdateWidgets()
+	public void UpdateWidgets()
 	{
 #if UNITY_EDITOR
 		bool forceVisible = cullWhileDragging ? false : (Application.isPlaying && mCullTime > mUpdateTime);
